@@ -1,0 +1,19 @@
+img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain
+}
+
+.main {
+
+}
+
+.side {
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    right: 0;
+    background-color: beige;
+    overflow-x: hidden;
+}
