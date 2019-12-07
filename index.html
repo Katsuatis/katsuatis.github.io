@@ -13,22 +13,58 @@
 </head>
 
 <body>
-  <script src="wheelzoom-master/wheelzoom.js"></script>
-
-  <div id="side" class="side">
-    <p>Miqez to kumpel</p>
-  </div>
-  
+    <div id="side" class="side">
+        <p id="xy">Miqez to kumpel</p>
+        <p id="map">Miqez to kumpel</p>
+        <p id="res">Miqez to kumpel</p>
+      </div>
+      
   <div class="main">
-    <img id="atlas" class="zoom" src="atlas.jpg" />
+    <img id="atlas" class="zoom" src="atlascut.jpg" />
   </div>
+
+ 
+ 
   <script>
       var atlas = document.getElementById("atlas");
+     
       atlas.addEventListener('mousemove', function (e){
-          console.log(`x: ${ e.x } | y: ${ e.y }`);
-          
+        //html objects
+        var xy = document.getElementById("xy");
+        var map = document.getElementById("map");
+        var res = document.getElementById("res");
+        //calculating and showing x/y coords
+        var x = e.x;
+        var y = e.y;
+        var scrolly = window.scrollY;
+        var scrolledy = y + scrolly;
+        xy.innerHTML = 'x:' + x + ' y:' + scrolledy;
+        
+        //checking resolution
+      var defaultHeight = 969;
+      var defaultWidth = 1920;
+      var height = window.innerHeight;
+      var width = window.innerWidth;
+      var heightScaling = defaultHeight/height;
+      var widthScaling = defaultWidth/width;
+      
+      console.log(753 * widthScaling);
+      console.log(436 * heightScaling);
+      
+        
+       //checking if a map is being hovered
+        var ax = Math.abs(x - (753 / heightScaling));
+        var ay = Math.abs(scrolledy - (436 / widthScaling));
+        
+        res.innerHTML = width + '/' + height;
+
+        if((ax + ay) < 25) map.innerHTML = 'wharf map';
+          else map.innerHTML = 'no map';
+        
+         
+  
       });
-      wheelzoom(document.querySelector('img.zoom'));
+      
      
   </script>
 </body>
