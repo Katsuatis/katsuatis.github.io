@@ -2,6 +2,7 @@
 
 <html lang="en">
 <head>
+    <script type="text/javascript" src="test.js"></script>
   <meta charset="utf-8">
 
   <title></title>
@@ -14,9 +15,11 @@
 
 <body>
     <div id="side" class="side">
+
         <p id="xy">Miqez to kumpel</p>
         <p id="map">Miqez to kumpel</p>
         <p id="res">Miqez to kumpel</p>
+        <button id="button" onclick="console.log(maps)"></button>
       </div>
       
   <div class="main">
@@ -26,6 +29,8 @@
  
  
   <script>
+    
+     
       var atlas = document.getElementById("atlas");
      
       atlas.addEventListener('mousemove', function (e){
@@ -48,18 +53,33 @@
       var heightScaling = defaultHeight/height;
       var widthScaling = defaultWidth/width;
       
-      console.log(753 * widthScaling);
-      console.log(436 * heightScaling);
       
         
        //checking if a map is being hovered
-        var ax = Math.abs(x - (753 / heightScaling));
-        var ay = Math.abs(scrolledy - (436 / widthScaling));
-        
-        res.innerHTML = width + '/' + height;
-
-        if((ax + ay) < 25) map.innerHTML = 'wharf map';
+       for(let i=0; i<maps.length; i++){
+        var ax = Math.abs(x - (maps[i].x / heightScaling));
+        var ay = Math.abs(scrolledy - (maps[i].y / heightScaling));
+        if((ax + ay) < 25) {
+          map.innerHTML = maps[i].name + ' map';
+          break;
+        }
           else map.innerHTML = 'no map';
+
+          if(i==maps.length) i = 0;
+       }
+     
+      
+        //map list test
+        function listMaps(maps){
+          let map_names = [];
+          for(let i=0; i<maps.length; i++){
+            map_names.push(maps[i].name);
+          }
+          return map_names;
+        }
+      //  res.innerHTML = parseInt(ax) + '/' + parseInt(ay) + '<br/>' + (ax+ay);
+
+        
         
          
   
