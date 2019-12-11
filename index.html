@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-    <script type="text/javascript" src="test.js"></script>
+    <script type="text/javascript" src="maps.js"></script>
   <meta charset="utf-8">
 
   <title></title>
@@ -18,12 +18,24 @@
 
         <p id="xy">Miqez to kumpel</p>
         <p id="map">Miqez to kumpel</p>
-        <p id="res">Miqez to kumpel</p>
-        <button id="button" onclick="console.log(maps)"></button>
+        <p id="tier">Miqez to kumpel</p>
+        <p id="cards">Miqez to kumpel</p>
+        <p id="bases">Miqez to kumpel</p>
+        <p id="clear" style="text-align: center;">Clear</p>
+        <div id="clearProgress">
+          <span id="clearFill" style="width: 33%;"></span>
+        </div>
+        <p style="text-align: center;">Boss</p>
+        <div id="bossProgress">
+            <span id="bossFill" style="width: 33%;"></span>
+          </div>
+      
+      
+       
       </div>
       
   <div class="main">
-    <img id="atlas" class="zoom" src="atlastest.jpg" />
+    <img id="atlas" class="zoom" src="atlascut.jpg" />
   </div>
 
  
@@ -37,7 +49,11 @@
         //html objects
         var xy = document.getElementById("xy");
         var map = document.getElementById("map");
-        var res = document.getElementById("res");
+        var tier = document.getElementById("tier");
+        var cards = document.getElementById("cards");
+        var bases = document.getElementById("bases");
+        var clear = document.getElementById("clearFill");
+        var boss = document.getElementById("bossFill");
         //calculating and showing x/y coords
         var x = e.x;
         var y = e.y;
@@ -60,15 +76,99 @@
         var ax = Math.abs(x - (maps[i].x / heightScaling));
         var ay = Math.abs(scrolledy - (maps[i].y / heightScaling));
         if((ax + ay) < 25) {
-          map.innerHTML = maps[i].name + ' map';
+          tooltip(maps[i].name, x, y);
+          map.innerHTML = 'Map: ' + maps[i].name;
+          tier.innerHTML = 'Tier: ' + maps[i].tier;
+          cards.innerHTML = 'Cards: ' + maps[i].cards;
+          bases.innerHTML = 'Bases: ' + maps[i].bases;
+          clearFill(maps[i].clear);
+          bossFill(maps[i].boss);
+          
           break;
-        }
-          else map.innerHTML = 'no map';
+        } else removeTooltip();
+          
 
           if(i==maps.length) i = 0;
        }
-     
+        //clear bar fill
+        function clearFill(num){
+          if(num === 1){
+            clear.style.width = "33%";
+            clear.style.backgroundColor = "crimson";
+          }
+
+          if(num === 2){
+            clear.style.width = "66%";
+            clear.style.backgroundColor = "gold";
+          }
+
+          if(num === 3){
+            clear.style.width = "100%";
+            clear.style.backgroundColor = "darkgreen";
+          } 
+        }
+        //boss bar fill
+        function bossFill(num){
+          if(num === 1){
+            boss.style.width = "33%";
+            boss.style.backgroundColor = "crimson";
+          }
+
+          if(num === 2){
+            boss.style.width = "66%";
+            boss.style.backgroundColor = "gold";
+          }
+
+          if(num === 3){
+            boss.style.width = "100%";
+            boss.style.backgroundColor = "darkgreen";
+          } 
+        }
       
+
+      //tooltip
+      
+function removeTooltip(){
+  if (document.contains(document.getElementById("tooltip"))){
+      document.getElementById("tooltip").remove();
+  }
+}
+
+function tooltip(name, x, y){
+  //remove existing tooltip
+  removeTooltip();
+  //creating tooltip
+  var tooltip = document.createElement("Div");
+  tooltip.id = "tooltip";
+  
+  //styling
+  tooltip.style.zIndex = "99";
+  tooltip.style.position = "fixed";
+  tooltip.style.top ="0";
+  var marginTop = y + 'px';
+  tooltip.style.marginTop = marginTop; 
+  var marginLeft = x + 'px';
+  tooltip.style.marginLeft = marginLeft;
+ 
+
+  //add paragraph
+  var paragraph = document.createElement("P");
+  paragraph.style.backgroundColor= "#e0e0e0";
+  paragraph.style.fontSize = "20px";
+  paragraph.style.padding = "3px";
+  var text = document.createTextNode(name);
+  
+  paragraph.appendChild(text);
+  tooltip.appendChild(paragraph);
+
+  document.getElementsByTagName("body")[0].appendChild(tooltip);
+}
+
+
+
+      //end of tooltip
+
+
         //map list test
         function listMaps(maps){
           let map_names = [];
