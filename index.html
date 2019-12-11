@@ -16,11 +16,11 @@
 <body>
     <div id="side" class="side">
 
-        <p id="xy">Miqez to kumpel</p>
-        <p id="map">Miqez to kumpel</p>
-        <p id="tier">Miqez to kumpel</p>
-        <p id="cards">Miqez to kumpel</p>
-        <p id="bases">Miqez to kumpel</p>
+        <p id="xy"></p>
+        <p id="map">Map</p>
+        <p id="tier">Tier</p>
+        <p id="cards">Cards</p>
+        <p id="bases">Bases</p>
         <p id="clear" style="text-align: center;">Clear</p>
         <div id="clearProgress">
           <span id="clearFill" style="width: 33%;"></span>
@@ -59,7 +59,7 @@
         var y = e.y;
         var scrolly = window.scrollY;
         var scrolledy = y + scrolly;
-        xy.innerHTML = 'x:' + x + ' y:' + scrolledy;
+        //xy.innerHTML = 'x:' + x + ' y:' + scrolledy;
         
         //checking resolution
       var defaultHeight = 969;
@@ -178,7 +178,7 @@ function tooltip(name, x, y){
           return map_names;
         }
       //  res.innerHTML = parseInt(ax) + '/' + parseInt(ay) + '<br/>' + (ax+ay);
-
+     
         
         
          
